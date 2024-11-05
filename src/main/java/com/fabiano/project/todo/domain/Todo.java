@@ -1,6 +1,7 @@
 package com.fabiano.project.todo.domain;
 
 import com.fabiano.project.todo.dto.RequestTodoDTO;
+import com.fabiano.project.todo.dto.RequestUpdateTodoDTO;
 import com.fabiano.project.todo.dto.ResponseTodoDTO;
 import jakarta.persistence.*;
 import lombok.*;
@@ -27,6 +28,13 @@ public class Todo {
     }
 
     public Todo(RequestTodoDTO data) {
+        this.title = data.title();
+        this.message = data.message();
+        this.priority = Priority.valueOf(data.priority());
+    }
+
+    public Todo(RequestUpdateTodoDTO data){
+        this.id = data.id();
         this.title = data.title();
         this.message = data.message();
         this.priority = Priority.valueOf(data.priority());
