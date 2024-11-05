@@ -8,6 +8,7 @@ import com.fabiano.project.todo.repository.TodoRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("todos")
@@ -42,9 +43,11 @@ public class TodoController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/usuario/{id}")
     public void deleteTodo(@PathVariable("id") Long id){
-        this.todoRepository.deleteById(id);
-        return;
+        if(this.todoRepository.existsById(id)){
+            this.todoRepository.deleteById(id);
+            return;
+        }
     }
 }
